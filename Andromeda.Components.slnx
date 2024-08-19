@@ -6,4 +6,6 @@
   <Project Path="Andromeda.Components.Avalonia\Andromeda.Components.Avalonia.csproj" />
   <Project Path="Andromeda.Components.Forms.Abstractions\Andromeda.Components.Forms.Abstractions.csproj" />
   <Project Path="Andromeda.Components.Forms\Andromeda.Components.Forms.csproj" />
+  <Project Path="Andromeda.Components.Menu.Abstractions\Andromeda.Components.Menu.Abstractions.csproj" />
+  <Project Path="Andromeda.Components.Menu\Andromeda.Components.Menu.csproj" />
 </Solution>
