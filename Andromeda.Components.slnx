@@ -3,6 +3,7 @@
     <File Path=".gitattributes" />
     <File Path=".gitignore" />
   </Folder>
+  <Project Path="Andromeda.Components.Avalonia\Andromeda.Components.Avalonia.csproj" />
   <Project Path="Andromeda.Components.Forms.Abstractions\Andromeda.Components.Forms.Abstractions.csproj" />
   <Project Path="Andromeda.Components.Forms\Andromeda.Components.Forms.csproj" />
 </Solution>
