@@ -1,0 +1,7 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:ctrl="using:Andromeda.Components.Avalonia.Controls">
+  <ControlTheme x:Key="{x:Type ctrl:SimpleExpander}"
+                BasedOn="{StaticResource {x:Type Expander}}"
+                TargetType="ctrl:SimpleExpander" />
+</ResourceDictionary>

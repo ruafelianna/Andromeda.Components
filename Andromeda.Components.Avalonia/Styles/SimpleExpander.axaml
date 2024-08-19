@@ -1,0 +1,41 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ctrl="using:Andromeda.Components.Avalonia.Controls">
+  <Style Selector="ctrl|SimpleExpander">
+
+    <Setter Property="VerticalAlignment" Value="Stretch"/>
+    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+
+    <Style Selector="^ /template/ ToggleButton#ExpanderHeader">
+
+      <Setter Property="MinWidth" Value="45"/>
+      <Setter Property="MinHeight" Value="45"/>
+
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate>
+            <Border x:Name="ExpandCollapseChevronBorder"
+                    CornerRadius="{DynamicResource ControlCornerRadius}"
+                    BorderBrush="{DynamicResource ExpanderChevronBorderBrush}"
+                    BorderThickness="{DynamicResource ExpanderChevronBorderThickness}"
+                    Background="{DynamicResource ExpanderChevronBackground}">
+              <Path x:Name="ExpandCollapseChevron"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    RenderTransformOrigin="50%,50%"
+                    Stretch="None"
+                    Stroke="{DynamicResource ExpanderChevronForeground}"
+                    StrokeThickness="1">
+                <Path.RenderTransform>
+                  <RotateTransform />
+                </Path.RenderTransform>
+              </Path>
+            </Border>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+
+    </Style>
+
+  </Style>
+</Styles>

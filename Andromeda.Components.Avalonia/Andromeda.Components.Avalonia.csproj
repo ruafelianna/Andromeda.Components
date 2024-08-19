@@ -20,4 +20,10 @@
     <PackageReference Include="Avalonia" Version="11.1.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Controls\SimpleExpander.axaml.cs">
+      <DependentUpon>SimpleExpander.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
 </Project>
