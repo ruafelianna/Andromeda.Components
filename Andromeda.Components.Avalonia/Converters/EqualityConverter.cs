@@ -20,7 +20,12 @@ namespace Andromeda.Components.Avalonia.Converters
                 return true;
             }
 
-            return values.Skip(1).All(x => x == values[0]);
+            if (values[0] is null)
+            {
+                return values.All(x => x is null);
+            }
+
+            return values.All(x => values[0]!.Equals(x));
         }
     }
 }

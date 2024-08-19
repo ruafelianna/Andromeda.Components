@@ -20,7 +20,7 @@ namespace Andromeda.Components.Avalonia.Converters
                 return BindingOperations.DoNothing;
             }
 
-            return values[0] != values[1];
+            return !values[0]?.Equals(values[1]);
         }
     }
 }
