@@ -26,4 +26,12 @@
     </Compile>
   </ItemGroup>
 
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Controls\MenuListBox.axaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Andromeda.Components.Menu.Abstractions\Andromeda.Components.Menu.Abstractions.csproj" />
+  </ItemGroup>
+
 </Project>

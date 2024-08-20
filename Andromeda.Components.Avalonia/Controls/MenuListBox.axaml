@@ -1,0 +1,29 @@
+<ListBox xmlns="https://github.com/avaloniaui"
+         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+         x:Class="Andromeda.Components.Avalonia.Controls.MenuListBox"
+         xmlns:ctrl="using:Andromeda.Components.Avalonia.Controls"
+         xmlns:cmpa="using:Andromeda.Components.Menu.Abstractions">
+  <ListBox.DataTemplates>
+    <DataTemplate x:DataType="cmpa:IHeadedMenuSector">
+      <Expander ExpandDirection="Down"
+                Header="{Binding Header}"
+                Classes="menu-item"
+                IsExpanded="{Binding $parent[ListBoxItem].IsSelected}">
+        <ctrl:MenuListBox ItemsSource="{Binding MenuItems}"/>
+      </Expander>
+    </DataTemplate>
+
+    <DataTemplate x:DataType="cmpa:IMenuSector">
+      <ctrl:MenuListBox ItemsSource="{Binding MenuItems}"
+                        Classes="menu-item"/>
+    </DataTemplate>
+
+    <DataTemplate x:DataType="cmpa:IMenuEndpoint">
+      <ContentControl Content="{Binding Content}"
+                      Classes="menu-item"/>
+    </DataTemplate>
+  </ListBox.DataTemplates>
+</ListBox>
