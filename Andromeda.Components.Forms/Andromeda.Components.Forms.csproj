@@ -16,4 +16,12 @@
     <PackageVersion>1.0.0-rc</PackageVersion>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="ReactiveUI.Fody" Version="19.5.41" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Andromeda.Components.Forms.Abstractions\Andromeda.Components.Forms.Abstractions.csproj" />
+  </ItemGroup>
+
 </Project>
