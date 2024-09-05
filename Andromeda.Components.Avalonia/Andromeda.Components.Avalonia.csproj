@@ -17,7 +17,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="11.1.3" />
+    <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Avalonia.Controls.TreeDataGrid" Version="11.0.10" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="ReactiveMarbles.ObservableEvents.SourceGenerator" Version="1.3.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,6 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Andromeda.Components.Forms\Andromeda.Components.Forms.csproj" />
     <ProjectReference Include="..\Andromeda.Components.Menu.Abstractions\Andromeda.Components.Menu.Abstractions.csproj" />
   </ItemGroup>
 
