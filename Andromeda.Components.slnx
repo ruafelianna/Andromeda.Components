@@ -2,6 +2,7 @@
   <Folder Name="/Solution Items/">
     <File Path=".gitattributes" />
     <File Path=".gitignore" />
+    <File Path="Directory.Build.props" />
   </Folder>
   <Project Path="Andromeda.Components.Avalonia\Andromeda.Components.Avalonia.csproj" />
   <Project Path="Andromeda.Components.Forms.Abstractions\Andromeda.Components.Forms.Abstractions.csproj" />
