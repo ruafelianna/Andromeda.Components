@@ -21,6 +21,9 @@ namespace Andromeda.Components.Forms.Extensions
         public static bool IsChoice(this PropertyInfo pi)
             => pi.IsDefined(typeof(FormField_ChoiceAttribute), true);
 
+        public static bool IsNumber(this PropertyInfo pi)
+            => pi.IsDefined(typeof(FormField_NumberAttribute), true);
+
         public static bool CanRead(
             this PropertyInfo pi,
             FormState state
@@ -66,6 +69,10 @@ namespace Andromeda.Components.Forms.Extensions
                     choice.OptionsPropertyName,
                     choice.UpdateCommandName
                 );
+            }
+            else if (pi.IsNumber())
+            {
+                return new NumberDataType();
             }
             throw new Exception("Unknown form field data type.");
         }

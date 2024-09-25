@@ -20,6 +20,9 @@ namespace Andromeda.Components.Forms.SourceGenerators
         public const string NS_Forms_FormFields
             = $"{NS_Forms}.FormFields";
 
+        public const string NS_Forms_FormFields_DataTypes
+            = $"{NS_Forms_FormFields}.DataTypes";
+
         // --------------------------------------------
 
         public const string I_IForm = "IForm";
@@ -43,6 +46,13 @@ namespace Andromeda.Components.Forms.SourceGenerators
         public const string P_HasDefault_IsInit = "IsInit";
 
         public const string P_HasDefault_IsReactive = "IsReactive";
+
+        // --------------------------------------------
+
+        public const string A_Number = "FormField_Number";
+
+        public const string A_NumberFull
+            = $"{A_Number}{POST_Attribute}";
 
         // --------------------------------------------
 

@@ -1,0 +1,185 @@
+using Andromeda.CSharp.Enums;
+using Andromeda.CSharp.Extensions;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
+using System.Threading;
+using static Andromeda.Components.Forms.SourceGenerators.InternalConsts;
+using static Andromeda.CSharp.Consts.Comments;
+using static Andromeda.CSharp.Consts.Directives;
+using static Andromeda.CSharp.Consts.Extensions;
+using static Andromeda.CSharp.Consts.Keywords;
+using static Andromeda.CSharp.Consts.Prefixes;
+
+namespace Andromeda.Components.Forms.SourceGenerators.Generators
+{
+    [Generator(LanguageNames.CSharp)]
+    public partial class NumbersGenerator : IIncrementalGenerator
+    {
+        public void Initialize(
+            IncrementalGeneratorInitializationContext context
+        )
+        {
+            var propertiesWithDefault = context.SyntaxProvider
+                .ForAttributeWithMetadataName(
+                    $"{NS_Forms_FormFields_DataTypes}.{A_NumberFull}",
+                    IsProperty,
+                    TransformProperty
+                )
+                .Where(record => record is not null)
+                .Collect();
+
+            context.RegisterSourceOutput(
+                propertiesWithDefault,
+                GenerateSourceCode
+            );
+        }
+
+        private const string _propPrefix = "Helper_Number_";
+
+        private record GeneratedPropertyInfo(
+            ITypeSymbol Class,
+            IPropertySymbol Property
+        );
+
+        private static bool IsProperty(
+            SyntaxNode node,
+            CancellationToken token
+        ) => node is PropertyDeclarationSyntax;
+
+        private static GeneratedPropertyInfo? TransformProperty(
+            GeneratorAttributeSyntaxContext ctx,
+            CancellationToken token
+        )
+        {
+            if (ctx.TargetSymbol is not IPropertySymbol propType)
+            {
+                return null;
+            }
+
+            // Checking that the attribute has correct
+            // name and namespace
+
+            var attr = ctx.Attributes
+                .SingleOrDefault(
+                    attrData => attrData.AttributeClass?.ToDisplayString(
+                        SymbolDisplayFormat.FullyQualifiedFormat
+                    ) == $"{PRE_Global}{NS_Forms_FormFields_DataTypes}.{A_NumberFull}"
+                );
+
+            if (attr is null)
+            {
+                return null;
+            }
+
+            // Getting property's parent class
+
+            var classParent = ctx.TargetNode.Parent;
+
+            if (classParent is not ClassDeclarationSyntax classSyntax)
+            {
+                return null;
+            }
+
+            var classSymbol = ctx.SemanticModel
+                .GetDeclaredSymbol(classSyntax, token);
+
+            if (classSymbol is not ITypeSymbol classType)
+            {
+                return null;
+            }
+
+            // Checking that the parent class implements the required
+            // interface
+
+            var hasInterface = classType.AllInterfaces
+                .Any(symbol => symbol.ToDisplayString(
+                    SymbolDisplayFormat.FullyQualifiedFormat
+                ) == $"{PRE_Global}{NS_Forms_Abstractions}.{I_IForm}");
+
+            if (!hasInterface)
+            {
+                return null;
+            }
+
+            return new(
+                classType,
+                propType
+            );
+        }
+
+        private static void GenerateSourceCode(
+            SourceProductionContext ctx,
+            ImmutableArray<GeneratedPropertyInfo?> source
+        )
+        {
+            var groups = source
+                .GroupBy<GeneratedPropertyInfo, ITypeSymbol>(
+                    info => info!.Class,
+                    SymbolEqualityComparer.Default
+                );
+
+            foreach (var group in groups)
+            {
+                var className = group.Key
+                    .ToDisplayString(
+                        SymbolDisplayFormat.FullyQualifiedFormat
+                    )
+                    .Substring(PRE_Global.Length);
+
+                ctx.AddSource(
+                    $"{className}{EXT_GeneratedCSharp}",
+                    GenerateClass(group)
+                );
+            }
+        }
+
+        private static string GenerateClass(
+            IGrouping<ISymbol, GeneratedPropertyInfo> group
+        )
+        {
+            var items = new List<string>();
+            var namespaces = new HashSet<string>();
+
+            foreach (var pi in group)
+            {
+                var (prop, nspace) = GenerateProperty(pi);
+
+                items.Add($"{PropTab}{prop}");
+                namespaces.Add(nspace);
+            }
+
+            namespaces.Add($"{PRE_Global}{NS_Fody}");
+
+            var ns = namespaces
+                .Select(x => $"{KW_Using} {x};")
+                .OrderBy(x => x);
+
+            return $@"{C_Autogenerated}
+
+{DIR_NullableRestore}
+
+{string.Join(NewLine, ns)}
+
+{KW_Namespace} {group.Key.ContainingNamespace.ToDisplayString()}
+{{
+    {KW_Partial} {KW_Class} {group.Key.Name}
+    {{
+{string.Join(NewLine, items)}
+    }}
+}}
+";
+        }
+
+        private static (string Prop, string Ns) GenerateProperty(
+            GeneratedPropertyInfo pi
+        ) => (
+            $"{Reactive} {AccessModifier.Public.AsString()} {KW_String}? {_propPrefix}{pi.Property.Name} {{ {KW_Get}; {KW_Set}; }}",
+            pi.Property.ContainingNamespace.ToDisplayString(
+                SymbolDisplayFormat.FullyQualifiedFormat
+            )
+        );
+    }
+}
