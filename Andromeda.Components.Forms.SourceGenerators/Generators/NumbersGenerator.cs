@@ -59,21 +59,6 @@ namespace Andromeda.Components.Forms.SourceGenerators.Generators
                 return null;
             }
 
-            // Checking that the attribute has correct
-            // name and namespace
-
-            var attr = ctx.Attributes
-                .SingleOrDefault(
-                    attrData => attrData.AttributeClass?.ToDisplayString(
-                        SymbolDisplayFormat.FullyQualifiedFormat
-                    ) == $"{PRE_Global}{NS_Forms_FormFields_DataTypes}.{A_NumberFull}"
-                );
-
-            if (attr is null)
-            {
-                return null;
-            }
-
             // Getting property's parent class
 
             var classParent = ctx.TargetNode.Parent;

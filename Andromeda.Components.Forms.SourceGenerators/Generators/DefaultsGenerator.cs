@@ -66,21 +66,6 @@ namespace Andromeda.Components.Forms.SourceGenerators.Generators
                 return null;
             }
 
-            // Checking that the attribute has correct
-            // name and namespace
-
-            var attr = ctx.Attributes
-                .SingleOrDefault(
-                    attrData => attrData.AttributeClass?.ToDisplayString(
-                        SymbolDisplayFormat.FullyQualifiedFormat
-                    ) == $"{PRE_Global}{NS_Forms_FormFields}.{A_HasDefaultFull}"
-                );
-
-            if (attr is null)
-            {
-                return null;
-            }
-
             // Getting property's parent class
 
             var classParent = ctx.TargetNode.Parent;
@@ -112,6 +97,8 @@ namespace Andromeda.Components.Forms.SourceGenerators.Generators
             }
 
             // Getting attribute's properties
+
+            var attr = ctx.Attributes.Single();
 
             IDictionary<string, object?> namedArgs = attr
                 .NamedArguments
