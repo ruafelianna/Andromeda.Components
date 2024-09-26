@@ -1,10 +1,12 @@
 using Andromeda.Components.Avalonia.Abstractions;
+using Andromeda.Components.Avalonia.ViewModels;
 using Andromeda.Components.Forms.Abstractions;
 using Andromeda.Components.Forms.DataTypes;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Data;
+using Avalonia.Data.Converters;
 using ReactiveMarbles.ObservableEvents;
 using ReactiveUI.Validation.Contexts;
 using System;
@@ -24,17 +26,12 @@ namespace Andromeda.Components.Avalonia.Helpers
                 Text = fi.Label,
                 [!DataValidationErrors.ErrorsProperty]
                     = new Binding(nameof(ValidationContext)),
+                Classes = {
+                    "form-label",
+                },
             };
             label.Loaded += (sender, args) => {
-                var vm = label.GetParentDataContext();
-
-                if (vm is not null)
-                {
-                    label.Bind(
-                        DataValidationErrors.HasErrorsProperty,
-                        vm.ValidationContext.Valid
-                    );
-                }
+                var vm = label.GetParentDataContext()?.Form;
             };
             
             return label;
@@ -54,10 +51,12 @@ namespace Andromeda.Components.Avalonia.Helpers
 
             var control = createControl(fi);
 
+            control.Classes.Add("form-control");
+
             control.Events().Loaded
                 .Subscribe(x =>
                 {
-                    var vm = control.GetParentDataContext();
+                    var vm = control.GetParentDataContext()?.Form;
 
                     if (BindControlFuncs.TryGetValue(
                         fi.DataType.Handle,
@@ -142,6 +141,7 @@ namespace Andromeda.Components.Avalonia.Helpers
                 { typeof(TextDataType).TypeHandle, RenderTextBox },
                 { typeof(BoolDataType).TypeHandle, RenderCheckBox },
                 { typeof(ChoiceDataType).TypeHandle, RenderComboBox },
+                { typeof(NumberDataType).TypeHandle, RenderTextBox },
             };
 
         private static readonly Dictionary<RuntimeTypeHandle,
@@ -150,9 +150,12 @@ namespace Andromeda.Components.Avalonia.Helpers
                 { typeof(TextDataType).TypeHandle, BindTextBox },
                 { typeof(BoolDataType).TypeHandle, BindCheckBox },
                 { typeof(ChoiceDataType).TypeHandle, BindComboBox },
+                { typeof(NumberDataType).TypeHandle, BindTextBox },
             };
 
-        private static IValidatableForm? GetParentDataContext(this Control control)
+        private static TreeDataGridFormViewModel? GetParentDataContext(
+            this Control control
+        )
         {
             var parent = control.Parent;
 
@@ -161,20 +164,27 @@ namespace Andromeda.Components.Avalonia.Helpers
                 parent = parent.Parent;
             }
 
-            return parent?.DataContext as IValidatableForm;
+            return parent?.DataContext as TreeDataGridFormViewModel;
         }
 
         private static void MakeBinding(
             this Control control,
             string propertyName,
             AvaloniaProperty controlProperty,
-            object? dataContext = null)
+            object? dataContext = null,
+            IValueConverter? converter = null
+        )
         {
             var binding = new Binding(propertyName);
 
             if (dataContext is not null)
             {
                 binding.Source = dataContext;
+            }
+
+            if (converter is not null)
+            {
+                binding.Converter = converter;
             }
 
             control.Bind(controlProperty, binding);
