@@ -8,6 +8,7 @@ using System.Reactive;
 using System.Reactive.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using static Andromeda.Components.Forms.Consts;
 
 namespace Andromeda.Components.Forms
 {
@@ -28,8 +29,14 @@ namespace Andromeda.Components.Forms
                 .Select(x => new PropertyInfo?[] {
                     _selfType.GetProperty(x.PropertyName),
                     _selfType.GetProperty(
-                        $"Default_{x.PropertyName}",
-                        BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+                        $"{DefaultPrefix}{(x.PropertyName
+                            .StartsWith(NumberPrefix)
+                                ? x.PropertyName[NumberPrefix.Length..]
+                                : x.PropertyName
+                        )}",
+                        BindingFlags.Instance
+                            | BindingFlags.Public
+                            | BindingFlags.NonPublic
                     )
                 })
                 .Where(x => x[1] is not null);

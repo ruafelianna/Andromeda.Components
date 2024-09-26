@@ -1,4 +1,5 @@
 using Andromeda.Components.Forms.Abstractions;
+using Andromeda.Components.Forms.DataTypes;
 using Andromeda.Components.Forms.Extensions;
 using DynamicData;
 using ReactiveUI;
@@ -8,6 +9,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive.Linq;
+using System.Reflection;
+using static Andromeda.Components.Forms.Consts;
 
 namespace Andromeda.Components.Forms
 {
@@ -22,20 +25,33 @@ namespace Andromeda.Components.Forms
 
             _formFieldsCache = new(x => x.PropertyName);
 
+            var selfType = GetType();
+
             _formFieldsCache.AddOrUpdate(
-                GetType()
+                selfType
                     .GetProperties()
                     .Where(pi => pi.IsFormField())
-                    .Select(pi => new FormFieldInfo(
-                        pi.Name,
-                        pi.PropertyType,
-                        pi.Order(),
-                        pi.Label(),
-                        pi.Hint(),
-                        stateObservable.Select(s => pi.CanRead(s)),
-                        stateObservable.Select(s => pi.CanWrite(s)),
-                        pi.DataType()
-                    ))
+                    .Select(pi => {
+                        var type = pi.DataType();
+
+                        PropertyInfo? np = null;
+
+                        if (type is NumberDataType)
+                        {
+                            np = selfType.GetProperty($"{NumberPrefix}{pi.Name}");
+                        }
+
+                        return new FormFieldInfo(
+                            np?.Name ?? pi.Name,
+                            pi.PropertyType,
+                            pi.Order(),
+                            pi.Label(),
+                            pi.Hint(),
+                            stateObservable.Select(s => pi.CanRead(s)),
+                            stateObservable.Select(s => pi.CanWrite(s)),
+                            pi.DataType()
+                        );
+                    })
             );
 
             _formFieldsCache
