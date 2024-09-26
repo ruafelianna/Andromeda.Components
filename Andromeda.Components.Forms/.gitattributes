@@ -1,1 +1,3 @@
 * text=auto eol=lf
+*.resx text eol=crlf
+*.Designer.cs text eol=crlf

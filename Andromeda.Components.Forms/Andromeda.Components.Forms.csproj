@@ -26,4 +26,19 @@
     <ProjectReference Include="..\Andromeda.Components.Forms.Abstractions\Andromeda.Components.Forms.Abstractions.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Assets\ValidationStrings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ValidationStrings.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Assets\ValidationStrings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ValidationStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>
