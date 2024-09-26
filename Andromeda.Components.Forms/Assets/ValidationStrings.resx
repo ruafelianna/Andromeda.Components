@@ -126,6 +126,18 @@
   <data name="ShouldBeEqual" xml:space="preserve">
     <value>Should be equal to {0}</value>
   </data>
+  <data name="ShouldBeGreater" xml:space="preserve">
+    <value>Should be greater than {0}</value>
+  </data>
+  <data name="ShouldBeGreaterOrEqual" xml:space="preserve">
+    <value>Should be greater than or equal to {0}</value>
+  </data>
+  <data name="ShouldBeLess" xml:space="preserve">
+    <value>Should be less than {0}</value>
+  </data>
+  <data name="ShouldBeLessOrEqual" xml:space="preserve">
+    <value>Should be less than or equal to {0}</value>
+  </data>
   <data name="ShouldNotBeEqual" xml:space="preserve">
     <value>Should not be equal to {0}</value>
   </data>

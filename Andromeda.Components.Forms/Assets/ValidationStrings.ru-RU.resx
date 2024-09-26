@@ -126,6 +126,18 @@
   <data name="ShouldBeEqual" xml:space="preserve">
     <value>Должно быть равно {0}</value>
   </data>
+  <data name="ShouldBeGreater" xml:space="preserve">
+    <value>Должно быть больше, чем {0}</value>
+  </data>
+  <data name="ShouldBeGreaterOrEqual" xml:space="preserve">
+    <value>Должно быть больше либо равно, чем {0}</value>
+  </data>
+  <data name="ShouldBeLess" xml:space="preserve">
+    <value>Должно быть меньше, чем {0}</value>
+  </data>
+  <data name="ShouldBeLessOrEqual" xml:space="preserve">
+    <value>Должно быть меньше либо равно, чем {0}</value>
+  </data>
   <data name="ShouldNotBeEqual" xml:space="preserve">
     <value>Должно быть не равно {0}</value>
   </data>

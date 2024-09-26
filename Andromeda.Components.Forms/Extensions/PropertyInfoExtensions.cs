@@ -28,13 +28,13 @@ namespace Andromeda.Components.Forms.Extensions
             this PropertyInfo pi,
             FormState state
         ) => ((pi.GetCustomAttribute<FormField_CanReadAttribute>()?
-                .State & state) ?? AllState) == state;
+                .State ?? AllState) & state) == state;
 
         public static bool CanWrite(
             this PropertyInfo pi,
             FormState state
         ) => ((pi.GetCustomAttribute<FormField_CanWriteAttribute>()?
-                .State & state) ?? AllState) == state;
+                .State ?? AllState) & state) == state;
 
         public static int Order(this PropertyInfo pi)
             => pi.GetCustomAttribute<FormField_OrderAttribute>()?

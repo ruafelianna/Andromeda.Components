@@ -88,6 +88,42 @@ namespace Andromeda.Components.Forms.Assets {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Should be greater than {0}.
+        /// </summary>
+        internal static string ShouldBeGreater {
+            get {
+                return ResourceManager.GetString("ShouldBeGreater", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Should be greater than or equal to {0}.
+        /// </summary>
+        internal static string ShouldBeGreaterOrEqual {
+            get {
+                return ResourceManager.GetString("ShouldBeGreaterOrEqual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Should be less than {0}.
+        /// </summary>
+        internal static string ShouldBeLess {
+            get {
+                return ResourceManager.GetString("ShouldBeLess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Should be less than or equal to {0}.
+        /// </summary>
+        internal static string ShouldBeLessOrEqual {
+            get {
+                return ResourceManager.GetString("ShouldBeLessOrEqual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Should not be equal to {0}.
         /// </summary>
         internal static string ShouldNotBeEqual {

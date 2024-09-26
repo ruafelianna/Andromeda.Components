@@ -7,6 +7,7 @@ using System;
 using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Numerics;
 using System.Reactive.Linq;
 
 namespace Andromeda.Components.Forms.Extensions
@@ -28,16 +29,13 @@ namespace Andromeda.Components.Forms.Extensions
         public static void EqualsRule<TViewModel, TProperty>(
             this TViewModel vm,
             Expression<Func<TViewModel, TProperty?>> property,
-            Func<TProperty> getValue,
+            TProperty? value,
             Func<TProperty?, string>? format = null,
             string? message = null
         )
             where TViewModel : IValidatableForm
             where TProperty : IEquatable<TProperty>
-        {
-            var value = getValue();
-
-            vm.ValidationRule(
+            => vm.ValidationRule(
                 property,
                 vm.WhenAnyValue(property)
                     .Select(x =>
@@ -47,24 +45,20 @@ namespace Andromeda.Components.Forms.Extensions
                 message
                 ?? string.Format(
                     ValidationStrings.ShouldBeEqual,
-                    format?.Invoke(value) ?? value.ToString()
+                    format?.Invoke(value) ?? value?.ToString()
                 )
             );
-        }
 
         public static void NotEqualsRule<TViewModel, TProperty>(
             this TViewModel vm,
             Expression<Func<TViewModel, TProperty?>> property,
-            Func<TProperty> getValue,
+            TProperty? value,
             Func<TProperty?, string>? format = null,
             string? message = null
         )
             where TViewModel : IValidatableForm
             where TProperty : IEquatable<TProperty>
-        {
-            var value = getValue();
-
-            vm.ValidationRule(
+            => vm.ValidationRule(
                 property,
                 vm.WhenAnyValue(property)
                     .Select(x =>
@@ -74,10 +68,9 @@ namespace Andromeda.Components.Forms.Extensions
                 message
                 ?? string.Format(
                     ValidationStrings.ShouldNotBeEqual,
-                    format?.Invoke(value) ?? value.ToString()
+                    format?.Invoke(value) ?? value?.ToString()
                 )
             );
-        }
 
         public static void ParseRule<TViewModel, TParsable>(
             this TViewModel vm,
@@ -100,24 +93,88 @@ namespace Andromeda.Components.Forms.Extensions
                 message ?? ValidationStrings.CannotParseAs
             );
 
-        public static void LinkParsable<TViewModel, TParsable>(
+        public static void GreaterRule<TViewModel, TComparable>(
             this TViewModel vm,
-            Expression<Func<TViewModel, TParsable?>> property,
-            Expression<Func<TViewModel, string?>> parsable,
-            IFormatProvider? provider = null
+            Expression<Func<TViewModel, string?>> property,
+            Expression<Func<TViewModel, TComparable?>> comparable,
+            TComparable value,
+            Func<TComparable?, string>? format = null,
+            string? message = null
         )
-            where TViewModel : ReactiveObject, IValidatableForm
-            where TParsable : struct, IParsable<TParsable>
-            => vm.WhenAnyValue(parsable)
-                .Select(x => TParsable
-                    .TryParse(
-                        x?.Trim(),
-                        provider ?? CultureInfo.CurrentCulture,
-                        out var result
-                    )
-                        ? (TParsable?)result
-                        : null
+            where TViewModel : IValidatableForm
+            where TComparable : struct, IComparisonOperators<TComparable, TComparable, bool>
+            => vm.ValidationRule(
+                property,
+                vm.WhenAnyValue(comparable)
+                    .Select(x => x is null || x > value),
+                message
+                ?? string.Format(
+                    ValidationStrings.ShouldBeGreater,
+                    format?.Invoke(value) ?? value.ToString()
                 )
-                .ToPropertyEx(vm, property);
+            );
+
+        public static void GreaterOrEqualRule<TViewModel, TComparable>(
+            this TViewModel vm,
+            Expression<Func<TViewModel, string?>> property,
+            Expression<Func<TViewModel, TComparable?>> comparable,
+            TComparable value,
+            Func<TComparable?, string>? format = null,
+            string? message = null
+        )
+            where TViewModel : IValidatableForm
+            where TComparable : struct, IComparisonOperators<TComparable, TComparable, bool>
+            => vm.ValidationRule(
+                property,
+                vm.WhenAnyValue(comparable)
+                    .Select(x => x is null || x >= value),
+                message
+                ?? string.Format(
+                    ValidationStrings.ShouldBeGreaterOrEqual,
+                    format?.Invoke(value) ?? value.ToString()
+                )
+            );
+
+        public static void LessRule<TViewModel, TComparable>(
+            this TViewModel vm,
+            Expression<Func<TViewModel, string?>> property,
+            Expression<Func<TViewModel, TComparable?>> comparable,
+            TComparable value,
+            Func<TComparable?, string>? format = null,
+            string? message = null
+        )
+            where TViewModel : IValidatableForm
+            where TComparable : struct, IComparisonOperators<TComparable, TComparable, bool>
+            => vm.ValidationRule(
+                property,
+                vm.WhenAnyValue(comparable)
+                    .Select(x => x is null || x < value),
+                message
+                ?? string.Format(
+                    ValidationStrings.ShouldBeLess,
+                    format?.Invoke(value) ?? value.ToString()
+                )
+            );
+
+        public static void LessOrEqualRule<TViewModel, TComparable>(
+            this TViewModel vm,
+            Expression<Func<TViewModel, string?>> property,
+            Expression<Func<TViewModel, TComparable?>> comparable,
+            TComparable value,
+            Func<TComparable?, string>? format = null,
+            string? message = null
+        )
+            where TViewModel : IValidatableForm
+            where TComparable : struct, IComparisonOperators<TComparable, TComparable, bool>
+            => vm.ValidationRule(
+                property,
+                vm.WhenAnyValue(comparable)
+                    .Select(x => x is null || x <= value),
+                message
+                ?? string.Format(
+                    ValidationStrings.ShouldBeLessOrEqual,
+                    format?.Invoke(value) ?? value.ToString()
+                )
+            );
     }
 }

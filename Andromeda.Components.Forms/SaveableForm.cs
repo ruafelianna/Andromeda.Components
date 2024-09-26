@@ -94,7 +94,7 @@ namespace Andromeda.Components.Forms
 
         private readonly Type _selfType;
 
-        protected void InitDefaultsAuto()
+        protected virtual void InitDefaultsAuto()
         {
             foreach (var prop in _propertiesWithDefaults)
             {
@@ -106,7 +106,7 @@ namespace Andromeda.Components.Forms
             }
         }
 
-        protected void SetDefaultsAuto()
+        protected virtual void SetDefaultsAuto()
         {
             foreach (var prop in _propertiesWithDefaults)
             {
