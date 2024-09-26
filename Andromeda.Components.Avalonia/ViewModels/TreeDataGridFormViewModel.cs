@@ -1,23 +1,18 @@
 using Andromeda.Components.Avalonia.Resources;
-using Andromeda.Components.Forms;
 using Andromeda.Components.Forms.Abstractions;
 using Avalonia.Controls;
 using Avalonia.Controls.Models.TreeDataGrid;
-using System;
-using System.Threading.Tasks;
+using ReactiveUI;
 
 namespace Andromeda.Components.Avalonia.ViewModels
 {
-    public abstract class TreeDataGridFormViewModel :
-        SaveableForm<TreeDataGridFormViewModel>
+    public class TreeDataGridFormViewModel : ReactiveObject
     {
-        public TreeDataGridFormViewModel(
-            FormState initState,
-            Func<TreeDataGridFormViewModel, Task<bool>> save,
-            IObservable<bool>? canSaveExt = null
-        ) : base(initState, save, canSaveExt)
+        public TreeDataGridFormViewModel(IForm form)
         {
-            Fields = new(FormFields)
+            Form = form;
+
+            Fields = new(form.FormFields)
             {
                 Columns = {
                     new TemplateColumn<IFormFieldInfo>("",
@@ -27,6 +22,8 @@ namespace Andromeda.Components.Avalonia.ViewModels
                 },
             };
         }
+
+        public IForm Form { get; }
 
         public FlatTreeDataGridSource<IFormFieldInfo> Fields { get; }
     }

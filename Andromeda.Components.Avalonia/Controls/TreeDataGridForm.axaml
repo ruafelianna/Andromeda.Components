@@ -5,9 +5,38 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Andromeda.Components.Avalonia.Controls.TreeDataGridForm"
              x:DataType="vm:TreeDataGridFormViewModel"
-             xmlns:vm="using:Andromeda.Components.Avalonia.ViewModels">
-  <TreeDataGrid Source="{Binding Fields}"
-                BorderThickness="2"
-                BorderBrush="{DynamicResource TreeDataGridGridLinesBrush}"
-                Padding = "10"/>
+             xmlns:vm="using:Andromeda.Components.Avalonia.ViewModels"
+             xmlns:ast="using:Andromeda.Components.Avalonia.Assets"
+             xmlns:ctrl="using:Andromeda.Components.Avalonia.Controls"
+             xmlns:abs="using:Andromeda.Components.Forms.Abstractions">
+  <StackPanel>
+
+    <TreeDataGrid Source="{Binding Fields}"
+                  Classes="form"
+                  HorizontalAlignment="Center"/>
+
+    <StackPanel Orientation="Horizontal"
+                HorizontalAlignment="Center">
+
+      <ContentControl Content="{Binding Form}">
+        <ContentControl.DataTemplates>
+          <DataTemplate x:DataType="abs:ISaveableForm">
+            <ctrl:CommandControl Content="{Binding $parent[ctrl:TreeDataGridForm].SaveContent}"
+                                 Command="{Binding Save}"/>
+          </DataTemplate>
+        </ContentControl.DataTemplates>
+      </ContentControl>
+
+      <ContentControl Content="{Binding Form}">
+        <ContentControl.DataTemplates>
+          <DataTemplate x:DataType="abs:IResettableForm">
+            <ctrl:CommandControl Content="{Binding $parent[ctrl:TreeDataGridForm].ResetContent}"
+                                 Command="{Binding Reset}"/>
+          </DataTemplate>
+        </ContentControl.DataTemplates>
+      </ContentControl>
+
+    </StackPanel>
+
+  </StackPanel>
 </UserControl>
