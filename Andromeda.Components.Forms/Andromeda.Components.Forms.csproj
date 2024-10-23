@@ -1,25 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup Label="FrameworkProperties">
-    <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-  </PropertyGroup>
-
-  <PropertyGroup Label="AssemblyProperties">
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-  </PropertyGroup>
-
-  <PropertyGroup Label="NugetProperties">
-    <Authors>Maria Sorokina</Authors>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageVersion>1.0.0-rc</PackageVersion>
-  </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="Andromeda.Components.Forms.SourceGenerators" Version="1.0.0-rc" OutputItemType="Analyzer" />
-    <PackageReference Include="Andromeda.CSharp" Version="1.0.0-rc" />
-    <PackageReference Include="ReactiveUI.Fody" Version="19.5.41" />
+    <PackageReference Include="Andromeda.Components.Forms.SourceGenerators" OutputItemType="Analyzer" />
+    <PackageReference Include="Andromeda.CSharp" />
+    <PackageReference Include="ReactiveUI.Fody" />
   </ItemGroup>
 
   <ItemGroup>

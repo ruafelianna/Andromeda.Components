@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Andromeda.Components.Avalonia", "Andromeda.Components.Avalonia\Andromeda.Components.Avalonia.csproj", "{F227E6A1-D222-48C7-9696-83AEA9AF0B6F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Andromeda.Components.Forms.Abstractions", "Andromeda.Components.Forms.Abstractions\Andromeda.Components.Forms.Abstractions.csproj", "{9A580439-79AB-4D81-96BA-7C24388F5826}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Andromeda.Components.Forms.SourceGenerators", "Andromeda.Components.Forms.SourceGenerators\Andromeda.Components.Forms.SourceGenerators.csproj", "{83117B96-2C91-4F64-83B0-2748C89356F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Andromeda.Components.Forms", "Andromeda.Components.Forms\Andromeda.Components.Forms.csproj", "{1FD4BCCD-B9E3-4700-A5AE-CFDB1098B3C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Andromeda.Components.Menu.Abstractions", "Andromeda.Components.Menu.Abstractions\Andromeda.Components.Menu.Abstractions.csproj", "{C634D523-148F-4D00-A469-B3C65AE7E2F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Andromeda.Components.Menu", "Andromeda.Components.Menu\Andromeda.Components.Menu.csproj", "{6E9C3E16-BFD1-4FC2-BC28-D43DA134DB23}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F227E6A1-D222-48C7-9696-83AEA9AF0B6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F227E6A1-D222-48C7-9696-83AEA9AF0B6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F227E6A1-D222-48C7-9696-83AEA9AF0B6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F227E6A1-D222-48C7-9696-83AEA9AF0B6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A580439-79AB-4D81-96BA-7C24388F5826}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A580439-79AB-4D81-96BA-7C24388F5826}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A580439-79AB-4D81-96BA-7C24388F5826}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A580439-79AB-4D81-96BA-7C24388F5826}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83117B96-2C91-4F64-83B0-2748C89356F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83117B96-2C91-4F64-83B0-2748C89356F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83117B96-2C91-4F64-83B0-2748C89356F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83117B96-2C91-4F64-83B0-2748C89356F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FD4BCCD-B9E3-4700-A5AE-CFDB1098B3C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FD4BCCD-B9E3-4700-A5AE-CFDB1098B3C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FD4BCCD-B9E3-4700-A5AE-CFDB1098B3C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FD4BCCD-B9E3-4700-A5AE-CFDB1098B3C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C634D523-148F-4D00-A469-B3C65AE7E2F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C634D523-148F-4D00-A469-B3C65AE7E2F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C634D523-148F-4D00-A469-B3C65AE7E2F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C634D523-148F-4D00-A469-B3C65AE7E2F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E9C3E16-BFD1-4FC2-BC28-D43DA134DB23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E9C3E16-BFD1-4FC2-BC28-D43DA134DB23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E9C3E16-BFD1-4FC2-BC28-D43DA134DB23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E9C3E16-BFD1-4FC2-BC28-D43DA134DB23}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

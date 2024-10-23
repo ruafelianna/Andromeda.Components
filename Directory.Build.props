@@ -1,6 +1,0 @@
-<Project>
-  <PropertyGroup>
-    <AvaloniaVersion>11.1.3</AvaloniaVersion>
-    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
-  </PropertyGroup>
-</Project>
